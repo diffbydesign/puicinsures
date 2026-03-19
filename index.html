@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pacific Union Insurance Company — Protecting what matters most since 1945.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════════════════
+DESIGN TOKENS
+══════════════════════════════════════════════ */
+:root {
+–r1:#A6151B; –r2:#E6332A; –accent:#6D0F09;
+–grad:linear-gradient(135deg,#A6151B 0%,#E6332A 100%);
+–grad-h:linear-gradient(90deg,#A6151B 0%,#E6332A 100%);
+–grad-soft:linear-gradient(135deg,rgba(166,21,27,.08) 0%,rgba(230,51,42,.04) 100%);
+
+–white:#ffffff;
+–pearl:#faf8f6;
+–warm-50:#f6f2ef;
+–warm-100:#ede6e0;
+–warm-200:#d9cec6;
+–gray-3:#9c8f87;
+–gray-5:#6b5f58;
+–gray-8:#2c231e;
+–ink:#1a110d;
+
+–fd:‘Lora’,Georgia,serif;
+–fb:‘DM Sans’,system-ui,sans-serif;
+–nav-h:58px;
+–r:18px; –r-sm:12px; –r-xs:8px;
+–shadow-sm:0 2px 8px rgba(26,17,13,.06);
+–shadow-md:0 8px 28px rgba(26,17,13,.09);
+–shadow-lg:0 20px 60px rgba(26,17,13,.12);
+–shadow-red:0 8px 28px rgba(166,21,27,.22);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:17px}
+body{font-family:var(–fb);background:var(–white);color:var(–gray-8);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+/* ══════════════════════════════════════════════
+NAV
+══════════════════════════════════════════════ */
+nav{
+position:fixed;top:0;left:0;right:0;z-index:900;
+height:var(–nav-h);
+background:rgba(255,255,255,.92);
+backdrop-filter:blur(20px) saturate(160%);
+-webkit-backdrop-filter:blur(20px) saturate(160%);
+border-bottom:1px solid var(–warm-100);
+transition:box-shadow .3s;
+}
+nav.scrolled{box-shadow:0 2px 20px rgba(166,21,27,.07)}
+.nav-inner{
+max-width:1200px;margin:0 auto;
+height:100%;padding:0 24px;
+display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+}
+
+/* Brand */
+.nav-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0}
+.nav-wm{line-height:1.2}
+.nav-wm .l1{display:block;font-family:var(–fb);font-weight:700;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(–ink)}
+.nav-wm .l2{display:block;font-family:var(–fb);font-weight:400;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(–gray-3)}
+
+/* Links */
+.nav-links{display:flex;align-items:center;gap:.15rem;list-style:none}
+.nav-links a{
+display:block;padding:.38rem .85rem;
+font-size:.78rem;font-weight:500;color:var(–gray-5);
+border-radius:980px;letter-spacing:.01em;
+transition:background .18s,color .18s;
+}
+.nav-links a:hover{background:var(–warm-50);color:var(–r1)}
+
+/* CTA */
+.nav-cta{
+background:var(–grad);color:white;
+padding:.52rem 1.3rem;border-radius:980px;
+font-size:.78rem;font-weight:600;white-space:nowrap;
+box-shadow:0 4px 14px rgba(166,21,27,.24);
+transition:opacity .2s,transform .18s;
+flex-shrink:0;
+}
+.nav-cta:hover{opacity:.88;transform:translateY(-1px)}
+
+/* Hamburger */
+.hamburger{
+display:none;flex-direction:column;justify-content:center;gap:5px;
+width:36px;height:36px;padding:6px;
+background:none;border:none;cursor:pointer;
+border-radius:var(–r-xs);transition:background .2s;
+}
+.hamburger:hover{background:var(–warm-50)}
+.hamburger span{
+display:block;height:1.5px;background:var(–gray-8);border-radius:2px;
+transition:transform .3s,opacity .3s,width .3s;transform-origin:center;
+}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* Mobile drawer */
+.mobile-nav{
+position:fixed;top:var(–nav-h);left:0;right:0;bottom:0;z-index:899;
+background:rgba(255,255,255,.97);
+backdrop-filter:blur(24px);
+display:flex;flex-direction:column;
+padding:2rem 1.5rem;
+transform:translateX(100%);
+transition:transform .38s cubic-bezier(.4,0,.2,1);
+overflow-y:auto;
+}
+.mobile-nav.open{transform:translateX(0)}
+.mobile-nav a{
+display:flex;align-items:center;justify-content:space-between;
+padding:1rem 0;
+font-size:1.1rem;font-weight:500;color:var(–gray-8);
+border-bottom:1px solid var(–warm-100);
+transition:color .2s;
+}
+.mobile-nav a:hover{color:var(–r1)}
+.mobile-nav a::after{content:‘→’;font-size:.9rem;color:var(–gray-3);transition:transform .2s}
+.mobile-nav a:hover::after{transform:translateX(4px)}
+.mobile-nav .mob-cta{
+margin-top:1.5rem;background:var(–grad);color:white;
+text-align:center;padding:1rem;border-radius:980px;
+font-size:.95rem;font-weight:700;
+box-shadow:var(–shadow-red);
+}
+.mobile-nav .mob-cta::after{display:none}
+
+/* ══════════════════════════════════════════════
+HERO
+══════════════════════════════════════════════ */
+.hero{
+min-height:100svh;
+background:var(–pearl);
+display:grid;grid-template-columns:1fr 1fr;
+align-items:center;
+padding-top:var(–nav-h);
+overflow:hidden;position:relative;
+}
+.hero-warmth{
+position:absolute;width:800px;height:800px;border-radius:50%;
+background:radial-gradient(circle,rgba(230,51,42,.07) 0%,transparent 65%);
+top:-200px;right:-200px;pointer-events:none;
+animation:breathe 8s ease-in-out infinite;
+}
+.hero-warmth2{
+position:absolute;width:400px;height:400px;border-radius:50%;
+background:radial-gradient(circle,rgba(166,21,27,.05) 0%,transparent 70%);
+bottom:-100px;left:10%;pointer-events:none;
+animation:breathe 11s ease-in-out infinite reverse;
+}
+.hero-stripe{
+position:absolute;inset:0;
+background:repeating-linear-gradient(-52deg,transparent 0px,transparent 46px,rgba(166,21,27,.015) 46px,rgba(166,21,27,.015) 47px);
+pointer-events:none;
+}
+
+.hero-left{padding:5rem 3rem 5rem 5rem;position:relative;z-index:1}
+
+.badge{
+display:inline-flex;align-items:center;gap:.5rem;
+background:rgba(166,21,27,.07);border:1px solid rgba(166,21,27,.15);
+border-radius:980px;padding:.36rem .9rem;
+font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(–r1);
+margin-bottom:1.8rem;
+animation:fadeUp .8s ease .1s both;
+}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(–r2);animation:pulse 2.4s ease infinite}
+
+.hero h1{
+font-family:var(–fd);font-size:clamp(2.6rem,4.8vw,4.2rem);
+font-weight:700;line-height:1.1;letter-spacing:-.01em;
+color:var(–ink);margin-bottom:1.1rem;
+animation:fadeUp .85s ease .22s both;
+}
+.hero h1 em{font-style:italic;font-weight:500;color:var(–r1)}
+
+.hero-tl{
+font-family:var(–fd);font-style:italic;font-size:.98rem;font-weight:400;
+color:var(–r1);margin-bottom:1.5rem;
+padding-left:1rem;border-left:2px solid var(–r2);
+animation:fadeUp .85s ease .33s both;
+}
+
+.hero-desc{
+font-size:1rem;font-weight:400;line-height:1.8;color:var(–gray-5);
+max-width:420px;margin-bottom:2.4rem;
+animation:fadeUp .85s ease .44s both;
+}
+
+.hero-btns{display:flex;gap:.8rem;flex-wrap:wrap;animation:fadeUp .85s ease .55s both}
+.btn-p{
+background:var(–grad);color:white;
+padding:.82rem 1.9rem;border-radius:980px;
+font-size:.86rem;font-weight:600;
+box-shadow:var(–shadow-red);
+transition:transform .2s,box-shadow .2s,opacity .2s;
+display:inline-block;
+}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(166,21,27,.3)}
+.btn-o{
+background:white;color:var(–r1);
+padding:.8rem 1.9rem;border-radius:980px;
+font-size:.86rem;font-weight:600;
+border:1.5px solid rgba(166,21,27,.2);
+box-shadow:var(–shadow-sm);
+transition:all .2s;display:inline-block;
+}
+.btn-o:hover{border-color:var(–r1);background:rgba(166,21,27,.04);transform:translateY(-2px)}
+
+/* Hero illustration panel */
+.hero-right{
+display:flex;align-items:center;justify-content:center;
+padding:4rem 4rem 4rem 2rem;
+position:relative;z-index:1;
+}
+.hero-illus-wrap{
+position:relative;width:100%;max-width:460px;
+animation:fadeUp 1s ease .3s both;
+}
+/* Main illustration card */
+.hero-illus-card{
+background:white;border-radius:28px;
+padding:3rem 2.5rem;
+box-shadow:var(–shadow-lg),0 0 0 1px var(–warm-100);
+position:relative;overflow:hidden;
+}
+.hero-illus-card::before{
+content:’’;position:absolute;top:0;left:0;right:0;height:3px;
+background:var(–grad);
+}
+/* Shield hero illustration — pure SVG */
+.illus-shield{display:flex;justify-content:center;margin-bottom:1.8rem}
+
+/* Floating stat cards */
+.float-card{
+position:absolute;
+background:white;border-radius:var(–r-sm);
+padding:.7rem 1rem;
+box-shadow:var(–shadow-md),0 0 0 1px var(–warm-100);
+display:flex;align-items:center;gap:.6rem;
+white-space:nowrap;
+}
+.float-card.fc1{top:-18px;right:-20px;animation:floatA 6s ease-in-out infinite}
+.float-card.fc2{bottom:24px;left:-24px;animation:floatB 7s ease-in-out infinite}
+.float-card.fc3{top:48%;right:-28px;transform:translateY(-50%);animation:floatA 8s ease-in-out 1s infinite}
+.fc-icon{
+width:32px;height:32px;border-radius:var(–r-xs);
+background:var(–grad-soft);
+display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.fc-text .fc-val{font-size:.82rem;font-weight:700;color:var(–ink);display:block;line-height:1}
+.fc-text .fc-lbl{font-size:.62rem;font-weight:400;color:var(–gray-3);display:block;margin-top:.1rem}
+
+/* illus logo block inside card */
+.illus-logo-block{text-align:center;margin-top:1.2rem}
+.illus-name{font-family:var(–fb);font-weight:700;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(–gray-8);display:block}
+.illus-sub{font-family:var(–fb);font-weight:400;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(–gray-3);display:block;margin-bottom:.9rem}
+.illus-pill{
+display:inline-block;background:var(–grad);color:white;
+font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+padding:.38rem 1rem;border-radius:980px;box-shadow:var(–shadow-red);
+}
+
+/* ══════════════════════════════════════════════
+STAT STRIP
+══════════════════════════════════════════════ */
+.stat-strip{
+background:white;
+border-top:1px solid var(–warm-100);
+border-bottom:1px solid var(–warm-100);
+display:grid;grid-template-columns:repeat(4,1fr);
+}
+.stat-cell{
+padding:2.4rem 1.5rem;text-align:center;
+border-right:1px solid var(–warm-100);
+position:relative;overflow:hidden;
+transition:background .25s;
+}
+.stat-cell:last-child{border-right:none}
+.stat-cell:hover{background:var(–warm-50)}
+.stat-cell::after{
+content:’’;position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+width:36px;height:2px;background:var(–grad-h);border-radius:2px 2px 0 0;
+opacity:0;transition:opacity .3s;
+}
+.stat-cell:hover::after{opacity:1}
+.stat-n{
+font-family:var(–fd);font-size:2.6rem;font-weight:700;
+color:var(–r1);display:block;line-height:1;margin-bottom:.35rem;
+letter-spacing:-.02em;
+}
+.stat-l{font-size:.75rem;font-weight:500;color:var(–gray-3);letter-spacing:.04em}
+
+/* ══════════════════════════════════════════════
+SHARED
+══════════════════════════════════════════════ */
+.section-wrap{max-width:1200px;margin:0 auto;padding:100px 24px}
+.section-wrap.sm{padding:72px 24px}
+
+.ew{
+display:inline-flex;align-items:center;gap:.45rem;
+font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+color:var(–r1);margin-bottom:.8rem;
+}
+.ew::before{content:’’;width:16px;height:2px;background:var(–grad-h);border-radius:2px;flex-shrink:0}
+
+.s-title{
+font-family:var(–fd);font-size:clamp(1.9rem,4.2vw,3rem);
+font-weight:700;line-height:1.13;letter-spacing:-.01em;
+color:var(–ink);margin-bottom:.9rem;
+}
+.s-title em{font-style:italic;color:var(–r1);font-weight:500}
+.s-body{font-size:.98rem;font-weight:400;line-height:1.8;color:var(–gray-5);max-width:500px}
+
+/* ══════════════════════════════════════════════
+PRODUCTS
+══════════════════════════════════════════════ */
+.prod-bg{background:var(–pearl)}
+.prod-grid{
+display:grid;grid-template-columns:repeat(4,1fr);
+gap:1rem;margin-top:3.5rem;
+}
+.prod-card{
+background:white;border-radius:var(–r);
+padding:2rem 1.6rem;
+border:1px solid var(–warm-100);
+position:relative;overflow:hidden;
+text-decoration:none;display:flex;flex-direction:column;
+box-shadow:var(–shadow-sm);
+transition:transform .25s,box-shadow .25s,border-color .25s;
+min-height:230px;
+}
+.prod-card::before{
+content:’’;position:absolute;top:0;left:0;right:0;height:3px;
+background:var(–grad-h);
+transform:scaleX(0);transform-origin:left;
+transition:transform .3s ease;
+border-radius:var(–r) var(–r) 0 0;
+}
+.prod-card:hover{transform:translateY(-4px);box-shadow:var(–shadow-md);border-color:rgba(166,21,27,.15)}
+.prod-card:hover::before{transform:scaleX(1)}
+.p-num{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(–warm-200);margin-bottom:.9rem;display:block}
+.p-icon{
+width:44px;height:44px;border-radius:var(–r-sm);
+background:var(–grad-soft);border:1px solid rgba(166,21,27,.1);
+display:flex;align-items:center;justify-content:center;
+margin-bottom:.9rem;flex-shrink:0;
+}
+.p-name{font-family:var(–fd);font-size:1.08rem;font-weight:600;color:var(–ink);margin-bottom:.5rem;line-height:1.2}
+.p-desc{font-size:.79rem;font-weight:400;color:var(–gray-3);line-height:1.68;flex:1}
+.p-link{
+margin-top:1.1rem;font-size:.77rem;font-weight:600;
+color:var(–r1);display:inline-flex;align-items:center;gap:.28rem;
+transition:gap .2s;
+}
+.prod-card:hover .p-link{gap:.55rem}
+.p-link::after{content:‘→’}
+
+/* ══════════════════════════════════════════════
+STORY
+══════════════════════════════════════════════ */
+.story-bg{background:white}
+.story-inner{display:grid;grid-template-columns:1fr 1fr;gap:5.5rem;align-items:center}
+
+.story-vis{
+position:relative;border-radius:24px;
+background:var(–pearl);border:1px solid var(–warm-100);
+aspect-ratio:4/5;overflow:hidden;
+display:flex;align-items:center;justify-content:center;
+box-shadow:var(–shadow-md);
+}
+.story-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(166,21,27,.08) 0%,transparent 60%)}
+.story-vis-inner{position:relative;z-index:1;text-align:center;padding:2rem;width:100%}
+.story-yr{
+font-family:var(–fd);font-size:7rem;font-weight:700;
+color:var(–r1);letter-spacing:-.04em;line-height:1;
+display:block;opacity:.16;
+}
+.story-yr-lbl{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(–gray-3);display:block;margin-top:.4rem}
+.cert-box{
+margin:1.8rem auto 0;max-width:220px;
+background:white;border-radius:var(–r-sm);border:1px solid var(–warm-100);
+padding:1.2rem 1.4rem;box-shadow:var(–shadow-sm);
+}
+.cert-lbl{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(–gray-3);display:block;margin-bottom:.35rem}
+.cert-val{font-family:var(–fd);font-size:1.3rem;font-weight:700;color:var(–r1);display:block;margin-bottom:.1rem}
+.cert-sub{font-size:.7rem;color:var(–gray-3);display:block}
+
+.story-text p{font-size:.97rem;line-height:1.85;color:var(–gray-5);margin-bottom:1rem}
+.story-text p strong{color:var(–gray-8);font-weight:600}
+.story-text p em{font-style:italic;color:var(–r1)}
+.story-btns{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.6rem}
+.btn-ghost{
+background:var(–warm-50);color:var(–gray-5);
+padding:.75rem 1.6rem;border-radius:980px;
+font-size:.84rem;font-weight:600;border:1.5px solid var(–warm-100);
+transition:all .2s;display:inline-block;
+}
+.btn-ghost:hover{border-color:var(–warm-200);background:var(–warm-100);color:var(–gray-8)}
+
+/* ══════════════════════════════════════════════
+CLAIMS BAND
+══════════════════════════════════════════════ */
+.claims-band{
+background:linear-gradient(135deg,var(–warm-50) 0%,#fdf1ee 100%);
+border-top:1px solid var(–warm-100);border-bottom:1px solid var(–warm-100);
+}
+.claims-inner{
+max-width:1200px;margin:0 auto;padding:80px 24px;
+display:grid;grid-template-columns:1fr auto;gap:4rem;align-items:center;
+}
+.claims-inner h2{font-family:var(–fd);font-size:2rem;font-weight:700;color:var(–ink);margin-bottom:.55rem;line-height:1.2}
+.claims-inner p{font-size:.95rem;color:var(–gray-5);line-height:1.7}
+.claims-btns{display:flex;flex-direction:column;gap:.7rem}
+
+/* ══════════════════════════════════════════════
+BONDS
+══════════════════════════════════════════════ */
+.bonds-bg{background:var(–pearl)}
+.bonds-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.8rem}
+.bond-card{
+background:white;border-radius:var(–r);padding:2rem 1.75rem;
+border:1px solid var(–warm-100);text-decoration:none;display:block;
+box-shadow:var(–shadow-sm);
+transition:transform .22s,box-shadow .22s,border-color .22s;
+}
+.bond-card:hover{transform:translateY(-3px);box-shadow:var(–shadow-md);border-color:rgba(166,21,27,.15)}
+.b-icon{
+width:44px;height:44px;border-radius:var(–r-sm);
+background:var(–grad-soft);border:1px solid rgba(166,21,27,.1);
+display:flex;align-items:center;justify-content:center;
+margin-bottom:.9rem;
+}
+.b-name{font-family:var(–fd);font-size:1.05rem;font-weight:600;color:var(–ink);margin-bottom:.4rem}
+.b-desc{font-size:.8rem;color:var(–gray-3);line-height:1.65;margin-bottom:1rem}
+.b-cta{font-size:.78rem;font-weight:600;color:var(–r1);display:inline-flex;align-items:center;gap:.25rem}
+.b-cta::after{content:‘→’}
+
+/* ══════════════════════════════════════════════
+PARTNERS
+══════════════════════════════════════════════ */
+.partners-bg{background:white}
+.partners-chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2.2rem}
+.p-chip{
+background:var(–pearl);border:1px solid var(–warm-100);
+border-radius:980px;padding:.5rem 1.1rem;
+font-size:.78rem;font-weight:500;color:var(–gray-5);
+transition:all .2s;cursor:default;
+}
+.p-chip:hover{background:rgba(166,21,27,.05);border-color:rgba(166,21,27,.18);color:var(–r1);transform:translateY(-1px)}
+
+/* ══════════════════════════════════════════════
+GOV BAND
+══════════════════════════════════════════════ */
+.gov-band{
+background:var(–grad);padding:80px 24px;
+text-align:center;position:relative;overflow:hidden;
+}
+.gov-band::before{
+content:’’;position:absolute;inset:0;
+background:url(“data:image/svg+xml,%3Csvg width=‘60’ height=‘60’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cg fill=’%23fff’ fill-opacity=’.04’%3E%3Ccircle cx=‘30’ cy=‘30’ r=‘1.5’/%3E%3C/g%3E%3C/svg%3E”);
+pointer-events:none;
+}
+.gov-inner{position:relative;z-index:1;max-width:600px;margin:0 auto}
+.gov-band h2{font-family:var(–fd);font-size:2.3rem;font-weight:700;color:white;margin-bottom:.8rem;line-height:1.2}
+.gov-band p{font-size:.98rem;color:rgba(255,255,255,.82);line-height:1.65;margin-bottom:2rem}
+.gov-ctas{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+.btn-white{
+background:white;color:var(–r1);
+padding:.82rem 2rem;border-radius:980px;
+font-size:.86rem;font-weight:700;
+box-shadow:0 4px 20px rgba(0,0,0,.15);
+transition:transform .2s,box-shadow .2s;display:inline-block;
+}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.2)}
+.btn-white-ol{
+background:transparent;color:white;
+padding:.8rem 2rem;border-radius:980px;
+font-size:.86rem;font-weight:600;
+border:1.5px solid rgba(255,255,255,.5);
+transition:all .2s;display:inline-block;
+}
+.btn-white-ol:hover{background:rgba(255,255,255,.12);border-color:white}
+
+/* ══════════════════════════════════════════════
+CONTACT
+══════════════════════════════════════════════ */
+.contact-bg{background:var(–pearl)}
+.contact-inner{display:grid;grid-template-columns:1fr 1.15fr;gap:5rem;align-items:start}
+
+.c-detail{display:flex;align-items:flex-start;gap:.85rem;margin-bottom:1.1rem}
+.c-ico{
+width:40px;height:40px;border-radius:var(–r-sm);
+background:white;border:1px solid var(–warm-100);
+display:flex;align-items:center;justify-content:center;flex-shrink:0;
+box-shadow:var(–shadow-sm);
+}
+.c-txt{font-size:.88rem;color:var(–gray-5);line-height:1.6}
+.c-txt a{color:var(–gray-8);font-weight:500;transition:color .15s}
+.c-txt a:hover{color:var(–r1)}
+.socials{display:flex;gap:.55rem;margin-top:1.8rem}
+.soc{
+width:40px;height:40px;border-radius:var(–r-sm);
+background:white;border:1px solid var(–warm-100);
+display:flex;align-items:center;justify-content:center;
+font-size:.7rem;font-weight:700;color:var(–gray-3);
+box-shadow:var(–shadow-sm);transition:all .2s;
+}
+.soc:hover{background:rgba(166,21,27,.06);border-color:rgba(166,21,27,.2);color:var(–r1);transform:translateY(-2px)}
+
+.c-form{
+background:white;border-radius:20px;padding:2.5rem;
+border:1px solid var(–warm-100);box-shadow:var(–shadow-md);
+display:flex;flex-direction:column;gap:.9rem;
+}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.f-field{display:flex;flex-direction:column;gap:.32rem}
+.f-field label{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(–gray-3)}
+.f-field input,.f-field select,.f-field textarea{
+background:var(–pearl);border:1.5px solid var(–warm-100);
+border-radius:var(–r-sm);padding:.74rem .95rem;
+font-size:.9rem;font-family:var(–fb);font-weight:400;color:var(–gray-8);
+outline:none;transition:border-color .2s,box-shadow .2s,background .2s;
+width:100%;-webkit-appearance:none;
+}
+.f-field select option{background:white}
+.f-field textarea{height:96px;resize:vertical}
+.f-field input:focus,.f-field select:focus,.f-field textarea:focus{
+border-color:var(–r1);background:white;
+box-shadow:0 0 0 3px rgba(166,21,27,.07);
+}
+.f-submit{
+background:var(–grad);border:none;border-radius:980px;
+color:white;padding:.88rem 2rem;
+font-size:.88rem;font-weight:700;font-family:var(–fb);
+cursor:pointer;letter-spacing:.02em;
+box-shadow:var(–shadow-red);
+transition:opacity .2s,transform .2s,box-shadow .2s;width:100%;
+}
+.f-submit:hover{opacity:.9;transform:translateY(-2px);box-shadow:0 12px 32px rgba(166,21,27,.3)}
+
+/* ══════════════════════════════════════════════
+FOOTER
+══════════════════════════════════════════════ */
+footer{background:var(–ink);padding:4rem 24px 2.5rem;color:white}
+.f-inner{max-width:1200px;margin:0 auto}
+.f-top{
+display:grid;grid-template-columns:1.4fr repeat(4,1fr);
+gap:3rem;padding-bottom:3rem;
+border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:2rem;
+}
+.f-brand-tl{font-family:var(–fd);font-style:italic;font-size:.82rem;color:rgba(255,255,255,.32);line-height:1.5;margin-top:1rem}
+.f-col-h{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.8rem;display:block}
+.f-lnk{display:block;font-size:.78rem;font-weight:400;color:rgba(255,255,255,.4);margin-bottom:.48rem;transition:color .15s}
+.f-lnk:hover{color:rgba(255,255,255,.82)}
+.f-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.f-copy{font-size:.7rem;color:rgba(255,255,255,.26)}
+.f-legal{display:flex;gap:1.5rem}
+.f-legal a{font-size:.7rem;color:rgba(255,255,255,.26);transition:color .15s}
+.f-legal a:hover{color:rgba(255,255,255,.65)}
+
+/* Footer brand row */
+.f-brand-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem}
+.f-wm .fl1{display:block;font-weight:700;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:white}
+.f-wm .fl2{display:block;font-weight:400;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+
+/* ══════════════════════════════════════════════
+LIVE CHAT WIDGET
+══════════════════════════════════════════════ */
+.chat-btn{
+position:fixed;bottom:24px;right:24px;z-index:800;
+width:56px;height:56px;border-radius:50%;
+background:var(–grad);
+border:none;cursor:pointer;
+display:flex;align-items:center;justify-content:center;
+box-shadow:0 6px 24px rgba(166,21,27,.38),0 2px 8px rgba(0,0,0,.12);
+transition:transform .25s,box-shadow .25s;
+animation:fadeUp .8s ease 1.2s both;
+}
+.chat-btn:hover{transform:scale(1.1);box-shadow:0 10px 32px rgba(166,21,27,.45)}
+.chat-btn .chat-pulse{
+position:absolute;top:-2px;right:-2px;
+width:14px;height:14px;border-radius:50%;
+background:#22c55e;border:2.5px solid white;
+animation:chatPulse 2s ease infinite;
+}
+
+/* Chat panel */
+.chat-panel{
+position:fixed;bottom:92px;right:24px;z-index:800;
+width:340px;background:white;border-radius:20px;
+box-shadow:0 20px 60px rgba(0,0,0,.14),0 0 0 1px var(–warm-100);
+overflow:hidden;
+transform:scale(.9) translateY(16px);
+transform-origin:bottom right;
+opacity:0;pointer-events:none;
+transition:transform .3s cubic-bezier(.4,0,.2,1),opacity .3s;
+}
+.chat-panel.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+
+.chat-header{
+background:var(–grad);padding:1.25rem 1.25rem 1rem;
+display:flex;align-items:flex-start;gap:.85rem;
+}
+.chat-avatar{
+width:42px;height:42px;border-radius:50%;
+background:rgba(255,255,255,.2);
+display:flex;align-items:center;justify-content:center;
+flex-shrink:0;font-size:1.2rem;
+}
+.chat-agent-name{font-size:.88rem;font-weight:700;color:white;line-height:1.2;display:block}
+.chat-status{font-size:.72rem;color:rgba(255,255,255,.78);display:flex;align-items:center;gap:.35rem}
+.chat-status-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;animation:chatPulse 2s ease infinite}
+.chat-close-btn{margin-left:auto;background:rgba(255,255,255,.15);border:none;width:28px;height:28px;border-radius:50%;color:white;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0}
+.chat-close-btn:hover{background:rgba(255,255,255,.25)}
+
+.chat-body{padding:1.25rem;max-height:240px;overflow-y:auto;display:flex;flex-direction:column;gap:.75rem}
+.chat-bubble{
+background:var(–warm-50);border-radius:16px 16px 16px 4px;
+padding:.7rem .9rem;font-size:.82rem;line-height:1.55;color:var(–gray-8);
+max-width:85%;
+}
+.chat-bubble.agent-bubble::before{display:none}
+.chat-time{font-size:.6rem;color:var(–gray-3);margin-top:.25rem}
+
+.chat-input-row{
+padding:.9rem 1.1rem;border-top:1px solid var(–warm-100);
+display:flex;align-items:center;gap:.6rem;
+}
+.chat-input{
+flex:1;background:var(–pearl);border:1.5px solid var(–warm-100);
+border-radius:980px;padding:.5rem .85rem;
+font-size:.82rem;font-family:var(–fb);color:var(–gray-8);
+outline:none;transition:border-color .2s;
+}
+.chat-input:focus{border-color:var(–r1)}
+.chat-send{
+width:34px;height:34px;border-radius:50%;
+background:var(–grad);border:none;cursor:pointer;
+display:flex;align-items:center;justify-content:center;
+box-shadow:0 3px 10px rgba(166,21,27,.3);
+transition:transform .2s,box-shadow .2s;flex-shrink:0;
+}
+.chat-send:hover{transform:scale(1.1)}
+
+/* quick reply chips */
+.quick-replies{padding:.25rem 1.1rem .9rem;display:flex;flex-wrap:wrap;gap:.4rem}
+.qr-chip{
+background:white;border:1.5px solid var(–warm-100);
+border-radius:980px;padding:.38rem .85rem;
+font-size:.75rem;font-weight:500;color:var(–r1);
+cursor:pointer;transition:all .18s;
+}
+.qr-chip:hover{background:rgba(166,21,27,.06);border-color:rgba(166,21,27,.25)}
+
+/* ══════════════════════════════════════════════
+ANIMATIONS
+══════════════════════════════════════════════ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes chatPulse{0%,100%{box-shadow:0 0 0 0 rgba(74,222,128,.5)}70%{box-shadow:0 0 0 6px rgba(74,222,128,0)}}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .78s ease,transform .78s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.09s}.d2{transition-delay:.18s}.d3{transition-delay:.27s}.d4{transition-delay:.36s}
+
+/* ══════════════════════════════════════════════
+RESPONSIVE
+══════════════════════════════════════════════ */
+@media(max-width:1024px){.prod-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:860px){
+.nav-links{display:none}
+.hamburger{display:flex}
+.hero{grid-template-columns:1fr;padding-top:var(–nav-h)}
+.hero-left{padding:3.5rem 1.5rem 2rem}
+.hero-right{padding:0 1.5rem 3.5rem}
+.hero-illus-wrap{max-width:360px}
+.stat-strip{grid-template-columns:repeat(2,1fr)}
+.stat-cell:nth-child(2){border-right:none}
+.story-inner{grid-template-columns:1fr}
+.story-vis{aspect-ratio:3/2}
+.claims-inner{grid-template-columns:1fr;gap:2rem}
+.bonds-grid{grid-template-columns:1fr}
+.contact-inner{grid-template-columns:1fr}
+.f-top{grid-template-columns:1fr 1fr;gap:2rem}
+.f-bottom{flex-direction:column;text-align:center}
+.f-legal{flex-wrap:wrap;justify-content:center}
+.chat-panel{width:300px}
+}
+@media(max-width:540px){
+.prod-grid{grid-template-columns:1fr}
+.f-row{grid-template-columns:1fr}
+.f-top{grid-template-columns:1fr}
+.hero-illus-wrap .float-card.fc3{display:none}
+}
+</style>
+
+</head>
+<body>
+
+<!-- ░░░ NAV ░░░ -->
+
+<nav id="nav">
+  <div class="nav-inner">
+
+```
+<a href="#home" class="nav-brand">
+  <svg width="30" height="34" viewBox="0 0 100 115" fill="none">
+    <defs><linearGradient id="ng" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#A6151B"/><stop offset="100%" stop-color="#E6332A"/></linearGradient></defs>
+    <rect x="2" y="2" width="26" height="72" rx="4" fill="url(#ng)"/>
+    <rect x="72" y="2" width="26" height="72" rx="4" fill="url(#ng)"/>
+    <rect x="37" y="2" width="26" height="58" rx="4" fill="#E6332A"/>
+    <rect x="2" y="60" width="96" height="18" rx="3" fill="url(#ng)"/>
+    <rect x="37" y="76" width="26" height="36" rx="3" fill="url(#ng)"/>
+  </svg>
+  <div class="nav-wm">
+    <span class="l1">Pacific Union</span>
+    <span class="l2">Insurance Company</span>
+  </div>
+</a>
+
+<ul class="nav-links">
+  <li><a href="#products">Products</a></li>
+  <li><a href="#about">About</a></li>
+  <li><a href="#claims">Claims</a></li>
+  <li><a href="#bonds">Bonds</a></li>
+  <li><a href="#partners">Partners</a></li>
+  <li><a href="#contact">Contact</a></li>
+</ul>
+
+<a href="https://services.puicinsurance.com/pay" class="nav-cta">Pay Premium</a>
+<button class="hamburger" id="hamburger" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
+```
+
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#products">Products</a>
+  <a href="#about">About PUIC</a>
+  <a href="#claims">Claims</a>
+  <a href="#bonds">Bonds</a>
+  <a href="#partners">Partners</a>
+  <a href="#contact">Contact Us</a>
+  <a href="https://services.puicinsurance.com/pay" class="mob-cta">Pay My Premium</a>
+</div>
+
+<!-- ░░░ HERO ░░░ -->
+
+<section class="hero" id="home">
+  <div class="hero-warmth"></div>
+  <div class="hero-warmth2"></div>
+  <div class="hero-stripe"></div>
+
+  <div class="hero-left">
+    <div class="badge"><span class="badge-dot"></span>Certificate of Authority No. 1 · Philippines</div>
+    <h1>Protection you<br>can <em>feel at<br>home</em> with.</h1>
+    <p class="hero-tl">Protecting what matters most since 1945.</p>
+    <p class="hero-desc">Pacific Union has been the trusted shield of Filipino families and businesses for over 80 years — warmly, reliably, always by your side.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-p">Explore Coverage</a>
+      <a href="#contact" class="btn-o">Talk to Us</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-illus-wrap">
+
+```
+  <!-- Floating stat cards -->
+  <div class="float-card fc1">
+    <div class="fc-icon">
+      <!-- Shield SVG icon -->
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div class="fc-text"><span class="fc-val">80+ Years</span><span class="fc-lbl">Trusted Protection</span></div>
+  </div>
+
+  <div class="float-card fc2">
+    <div class="fc-icon">
+      <!-- Star SVG icon -->
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    </div>
+    <div class="fc-text"><span class="fc-val">Cert. No. 1</span><span class="fc-lbl">First in the Philippines</span></div>
+  </div>
+
+  <div class="float-card fc3">
+    <div class="fc-icon">
+      <!-- Check SVG icon -->
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="fc-text"><span class="fc-val">7 Products</span><span class="fc-lbl">Full Coverage Range</span></div>
+  </div>
+
+  <!-- Main card with hero illustration -->
+  <div class="hero-illus-card">
+    <!-- Hero SVG illustration: family under a shield -->
+    <div class="illus-shield">
+      <svg width="200" height="180" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="shieldGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#A6151B"/>
+            <stop offset="100%" stop-color="#E6332A"/>
+          </linearGradient>
+          <linearGradient id="shieldFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(166,21,27,.08)"/>
+            <stop offset="100%" stop-color="rgba(230,51,42,.04)"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Large background shield -->
+        <path d="M100 8 L168 32 L168 92 C168 132 136 162 100 172 C64 162 32 132 32 92 L32 32 Z" fill="url(#shieldFill)" stroke="url(#shieldGrad)" stroke-width="2"/>
+
+        <!-- Inner shield outline -->
+        <path d="M100 22 L154 42 L154 90 C154 122 130 148 100 157 C70 148 46 122 46 90 L46 42 Z" fill="none" stroke="rgba(166,21,27,.15)" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+        <!-- House icon inside shield -->
+        <g transform="translate(68, 55)">
+          <!-- House body -->
+          <rect x="8" y="28" width="48" height="34" rx="3" fill="url(#shieldGrad)" opacity=".9"/>
+          <!-- Roof -->
+          <polygon points="0,30 32,8 64,30" fill="url(#shieldGrad)"/>
+          <!-- Door -->
+          <rect x="22" y="42" width="20" height="20" rx="2" fill="rgba(255,255,255,.5)"/>
+          <!-- Window left -->
+          <rect x="10" y="36" width="10" height="10" rx="1.5" fill="rgba(255,255,255,.6)"/>
+          <!-- Window right -->
+          <rect x="44" y="36" width="10" height="10" rx="1.5" fill="rgba(255,255,255,.6)"/>
+          <!-- Chimney -->
+          <rect x="42" y="10" width="8" height="16" rx="2" fill="url(#shieldGrad)"/>
+        </g>
+
+        <!-- Small people figures -->
+        <!-- Person 1 -->
+        <circle cx="72" cy="148" r="6" fill="url(#shieldGrad)"/>
+        <path d="M66 155 Q72 162 78 155" stroke="url(#shieldGrad)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Person 2 -->
+        <circle cx="100" cy="145" r="7" fill="url(#shieldGrad)" opacity=".9"/>
+        <path d="M93 153 Q100 161 107 153" stroke="url(#shieldGrad)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Person 3 -->
+        <circle cx="128" cy="148" r="6" fill="url(#shieldGrad)"/>
+        <path d="M122 155 Q128 162 134 155" stroke="url(#shieldGrad)" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+        <!-- Check mark overlay -->
+        <circle cx="152" cy="36" r="14" fill="white" stroke="url(#shieldGrad)" stroke-width="2"/>
+        <polyline points="146,36 151,41 158,32" stroke="url(#shieldGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+        <!-- Sparkle dots -->
+        <circle cx="38" cy="56" r="2.5" fill="var(--r2)" opacity=".4"/>
+        <circle cx="162" cy="80" r="2" fill="var(--r1)" opacity=".3"/>
+        <circle cx="44" cy="120" r="3" fill="var(--r2)" opacity=".25"/>
+      </svg>
+    </div>
+
+    <div class="illus-logo-block">
+      <!-- PUIC SVG mark -->
+      <svg width="52" height="60" viewBox="0 0 100 115" fill="none" style="margin:0 auto .8rem">
+        <defs><linearGradient id="ilg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#A6151B"/><stop offset="100%" stop-color="#E6332A"/></linearGradient></defs>
+        <rect x="2" y="2" width="26" height="72" rx="4" fill="url(#ilg)"/>
+        <rect x="72" y="2" width="26" height="72" rx="4" fill="url(#ilg)"/>
+        <rect x="37" y="2" width="26" height="58" rx="4" fill="#E6332A"/>
+        <rect x="2" y="60" width="96" height="18" rx="3" fill="url(#ilg)"/>
+        <rect x="37" y="76" width="26" height="36" rx="3" fill="url(#ilg)"/>
+      </svg>
+      <span class="illus-name">Pacific Union</span>
+      <span class="illus-sub">Insurance Company</span>
+      <span class="illus-pill">Certificate of Authority No. 1</span>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ░░░ STATS ░░░ -->
+
+<div class="stat-strip">
+  <div class="stat-cell reveal"><span class="stat-n" data-val="1945">1945</span><span class="stat-l">Year Founded</span></div>
+  <div class="stat-cell reveal d1"><span class="stat-n">80+</span><span class="stat-l">Years Serving Filipinos</span></div>
+  <div class="stat-cell reveal d2"><span class="stat-n">7</span><span class="stat-l">Lines of Coverage</span></div>
+  <div class="stat-cell reveal d3"><span class="stat-n">#1</span><span class="stat-l">First Authority Issued</span></div>
+</div>
+
+<!-- ░░░ PRODUCTS ░░░ -->
+
+<div class="prod-bg" id="products">
+  <div class="section-wrap">
+    <span class="ew reveal">Products &amp; Services</span>
+    <h2 class="s-title reveal d1">The right coverage,<br><em>right here.</em></h2>
+    <div class="prod-grid">
+
+```
+  <!-- Motor -->
+  <a href="https://services.puicinsurance.com/motor-insurance" class="prod-card reveal">
+    <span class="p-num">01</span>
+    <div class="p-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+      </svg>
+    </div>
+    <div class="p-name">Motor Insurance</div>
+    <p class="p-desc">Full vehicle protection against damage, theft, and third-party liability — for every road ahead.</p>
+    <span class="p-link">Get a Quote</span>
+  </a>
+
+  <!-- Fire -->
+  <a href="https://services.puicinsurance.com/fire-insurance" class="prod-card reveal d1">
+    <span class="p-num">02</span>
+    <div class="p-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+    </div>
+    <div class="p-name">Fire Insurance</div>
+    <p class="p-desc">Home and commercial property protection against fire, lightning, and related perils.</p>
+    <span class="p-link">Get a Quote</span>
+  </a>
+
+  <!-- Personal Accident -->
+  <a href="https://services.puicinsurance.com/personal-accident-insurance" class="prod-card reveal d2">
+    <span class="p-num">03</span>
+    <div class="p-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+    </div>
+    <div class="p-name">Personal Accident</div>
+    <p class="p-desc">Coverage for accidental injury, disability, and death — protecting you and your family.</p>
+    <span class="p-link">Get a Quote</span>
+  </a>
+
+  <!-- Marine -->
+  <a href="https://services.puicinsurance.com/marine-insurance" class="prod-card reveal d3">
+    <span class="p-num">04</span>
+    <div class="p-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 20a2.4 2.4 0 0 0 2 1 2.4 2.4 0 0 0 2-1 2.4 2.4 0 0 1 2-1 2.4 2.4 0 0 1 2 1 2.4 2.4 0 0 0 2 1 2.4 2.4 0 0 0 2-1 2.4 2.4 0 0 1 2-1 2.4 2.4 0 0 1 2 1"/><path d="M4 18l2-12h12l2 12"/><path d="M12 6V2"/><path d="M8 6h8"/>
+      </svg>
+    </div>
+    <div class="p-name">Marine Insurance</div>
+    <p class="p-desc">Inland and ocean cargo coverage — your goods secured at every point of the journey.</p>
+    <span class="p-link">Get a Quote</span>
+  </a>
+
+  <!-- Liability -->
+  <a href="https://services.puicinsurance.com/comprehensive-general-liability-insurance" class="prod-card reveal">
+    <span class="p-num">05</span>
+    <div class="p-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+    </div>
+    <div class="p-name">Liability Insurance</div>
+    <p class="p-desc">Legal defense and coverage against third-party bodily injury or property damage claims.</p>
+    <span class="p-link">Get a Quote</span>
+  </a>
+
+  <!-- Surety -->
+  <a href="https://services.puicinsurance.com/surety-bond-insurance" class="prod-card reveal d1">
+    <span class="p-num">06</span>
+    <div class="p-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+      </svg>
+    </div>
+    <div class="p-name">Surety Bonds</div>
+    <p class="p-desc">Financial guarantees for government contracts, judicial bonds, and business obligations.</p>
+    <span class="p-link">Apply Now</span>
+  </a>
+
+  <!-- Engineering -->
+  <a href="https://services.puicinsurance.com/engineering-insurance" class="prod-card reveal d2">
+    <span class="p-num">07</span>
+    <div class="p-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><polyline points="7 10 10 13 14 9 17 12"/>
+      </svg>
+    </div>
+    <div class="p-name">Engineering Insurance</div>
+    <p class="p-desc">Contractor's all-risk and equipment policies for construction projects of every scale.</p>
+    <span class="p-link">Get a Quote</span>
+  </a>
+
+  <!-- Renew -->
+  <a href="https://puicinsurance.com/renew-my-policy/" class="prod-card reveal d3" style="background:var(--warm-50);border-style:dashed">
+    <span class="p-num">↗</span>
+    <div class="p-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+      </svg>
+    </div>
+    <div class="p-name">Renew My Policy</div>
+    <p class="p-desc">Already with us? Renew your policy quickly and easily — right here, right now.</p>
+    <span class="p-link">Renew Now</span>
+  </a>
+
+</div>
+```
+
+  </div>
+</div>
+
+<!-- ░░░ STORY ░░░ -->
+
+<div class="story-bg" id="about">
+  <div class="section-wrap">
+    <div class="story-inner">
+      <div class="story-vis reveal">
+        <div class="story-glow"></div>
+        <div class="story-vis-inner">
+          <span class="story-yr">1945</span>
+          <span class="story-yr-lbl">Founded in Manila</span>
+          <div class="cert-box">
+            <span class="cert-lbl">Certificate of Authority</span>
+            <span class="cert-val">No. 1</span>
+            <span class="cert-sub">First issued in the Philippines</span>
+          </div>
+        </div>
+      </div>
+      <div class="story-text reveal d2">
+        <span class="ew">Our Story</span>
+        <h2 class="s-title">Eight decades of<br><em>standing by you.</em></h2>
+        <p>Pacific Union Insurance Company was founded on <strong>June 5, 1945</strong> by Don Aurelio Periquet Sr. — a visionary pioneer of the Philippine insurance industry.</p>
+        <p>We received <strong>Certificate of Authority No. 1</strong> from the President of the Philippines — making us the very first non-life insurer authorized to operate in the nation.</p>
+        <p>Our inaugural bond was issued on behalf of <em>former President Jose P. Laurel Sr.</em> in favor of the Commonwealth of the Philippines. That level of trust has defined us for 80 years — and still does today.</p>
+        <div class="story-btns">
+          <a href="https://puicinsurance.com/about/" class="btn-p">Our Full Story</a>
+          <a href="https://puicinsurance.com/corporate-governance/" class="btn-ghost">Governance</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ CLAIMS ░░░ -->
+
+<div class="claims-band" id="claims">
+  <div class="claims-inner">
+    <div class="reveal">
+      <span class="ew">Claims</span>
+      <h2>Need to make a claim?<br>We've got you.</h2>
+      <p style="margin-top:.5rem">Our process is clear, fair, and built around you — from first notice to final resolution.</p>
+    </div>
+    <div class="claims-btns reveal d2">
+      <a href="https://puicinsurance.com/claims/file-a-claim/" class="btn-p">File a Claim</a>
+      <a href="https://puicinsurance.com/claims/claims-checklist/" class="btn-o">Claims Checklist</a>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ BONDS ░░░ -->
+
+<div class="bonds-bg" id="bonds">
+  <div class="section-wrap sm">
+    <span class="ew reveal">Surety Bonds</span>
+    <h2 class="s-title reveal d1">Bond applications,<br><em>made simple.</em></h2>
+    <div class="bonds-grid">
+
+```
+  <a href="https://services.puicinsurance.com/form/individual-bond-application" class="bond-card reveal">
+    <div class="b-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <div class="b-name">Individual Bond</div>
+    <p class="b-desc">Apply as an individual applicant — guided, clear, and quick.</p>
+    <span class="b-cta">Apply Now</span>
+  </a>
+
+  <a href="https://services.puicinsurance.com/form/corporation-bond-application" class="bond-card reveal d1">
+    <div class="b-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+    </div>
+    <div class="b-name">Corporate / Partnership</div>
+    <p class="b-desc">Surety bond applications for corporations and partnerships.</p>
+    <span class="b-cta">Apply Now</span>
+  </a>
+
+  <a href="https://services.puicinsurance.com/form/cosigner-statement" class="bond-card reveal d2">
+    <div class="b-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    </div>
+    <div class="b-name">Co-Signer Statement</div>
+    <p class="b-desc">Submit a co-signer declaration for an existing bond application.</p>
+    <span class="b-cta">Submit</span>
+  </a>
+
+</div>
+```
+
+  </div>
+</div>
+
+<!-- ░░░ PARTNERS ░░░ -->
+
+<div class="partners-bg" id="partners">
+  <div class="section-wrap sm">
+    <span class="ew reveal">Our Partners</span>
+    <h2 class="s-title reveal d1">Trusted by the <em>Philippines'</em><br>leading banks.</h2>
+    <p class="s-body reveal d2">We work with the country's most respected financial institutions to deliver seamless insurance for their clients.</p>
+    <div class="partners-chips reveal d3">
+      <div class="p-chip">EastWest Bank</div>
+      <div class="p-chip">UnionBank</div>
+      <div class="p-chip">PSBank</div>
+      <div class="p-chip">Metrobank</div>
+      <div class="p-chip">Asia United Bank</div>
+      <div class="p-chip">Development Bank of the Philippines</div>
+      <div class="p-chip">LandBank</div>
+      <div class="p-chip">Security Bank</div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ GOVERNANCE ░░░ -->
+
+<div class="gov-band">
+  <div class="gov-inner reveal">
+    <h2>Transparent.<br>Accountable. Compliant.</h2>
+    <p>IC License, AMLA registration, annual audited financials, and ASEAN CG Scorecard — all publicly available for every stakeholder.</p>
+    <div class="gov-ctas">
+      <a href="https://puicinsurance.com/corporate-governance/" class="btn-white">View Governance Docs</a>
+      <a href="https://puicinsurance.com/compliance-and-performance/" class="btn-white-ol">Compliance &amp; Performance</a>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ CONTACT ░░░ -->
+
+<div class="contact-bg" id="contact">
+  <div class="section-wrap">
+    <div class="contact-inner">
+
+```
+  <div class="reveal">
+    <span class="ew">Get in Touch</span>
+    <h2 class="s-title">We're here,<br><em>always.</em></h2>
+    <p class="s-body" style="margin-bottom:2rem">Whether you need a quote, have a claims question, or just want to know more — our team is ready.</p>
+
+    <div class="c-detail">
+      <div class="c-ico">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+      </div>
+      <div class="c-txt"><a href="tel:+63288451033">+63 2 8845 1033 to 37</a></div>
+    </div>
+    <div class="c-detail">
+      <div class="c-ico">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div class="c-txt"><a href="mailto:admin@puicinsurance.com">admin@puicinsurance.com</a></div>
+    </div>
+    <div class="c-detail">
+      <div class="c-ico">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A6151B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="c-txt">Philippine Head Office<br>Multiple branches nationwide</div>
+    </div>
+
+    <div class="socials">
+      <a href="https://facebook.com/pacificunionph" class="soc" title="Facebook">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://ph.linkedin.com/company/puicinsurance" class="soc" title="LinkedIn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://www.instagram.com/pacificunioninsurance" class="soc" title="Instagram">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="c-form reveal d2">
+    <div class="f-row">
+      <div class="f-field"><label>First Name</label><input type="text" placeholder="Juan"></div>
+      <div class="f-field"><label>Last Name</label><input type="text" placeholder="dela Cruz"></div>
+    </div>
+    <div class="f-field"><label>Email</label><input type="email" placeholder="juan@example.com"></div>
+    <div class="f-field"><label>Phone</label><input type="tel" placeholder="+63 9xx xxx xxxx"></div>
+    <div class="f-field">
+      <label>Subject</label>
+      <select>
+        <option value="">Select a subject</option>
+        <option>Request for Proposal</option>
+        <option>Claims Inquiry</option>
+        <option>Certificate of No Claim</option>
+        <option>Bonds</option>
+        <option>Others</option>
+      </select>
+    </div>
+    <div class="f-field"><label>Message</label><textarea placeholder="How can we help you today?"></textarea></div>
+    <button class="f-submit">Send Message →</button>
+  </div>
+
+</div>
+```
+
+  </div>
+</div>
+
+<!-- ░░░ FOOTER ░░░ -->
+
+<footer>
+  <div class="f-inner">
+    <div class="f-top">
+      <div>
+        <div class="f-brand-row">
+          <svg width="26" height="30" viewBox="0 0 100 115" fill="none">
+            <defs><linearGradient id="fg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#A6151B"/><stop offset="100%" stop-color="#E6332A"/></linearGradient></defs>
+            <rect x="2" y="2" width="26" height="72" rx="4" fill="url(#fg)"/>
+            <rect x="72" y="2" width="26" height="72" rx="4" fill="url(#fg)"/>
+            <rect x="37" y="2" width="26" height="58" rx="4" fill="#E6332A"/>
+            <rect x="2" y="60" width="96" height="18" rx="3" fill="url(#fg)"/>
+            <rect x="37" y="76" width="26" height="36" rx="3" fill="url(#fg)"/>
+          </svg>
+          <div class="f-wm"><span class="fl1">Pacific Union</span><span class="fl2">Insurance Company</span></div>
+        </div>
+        <p class="f-brand-tl">Protecting what matters<br>most since 1945.</p>
+      </div>
+      <div>
+        <span class="f-col-h">Products</span>
+        <a href="https://services.puicinsurance.com/motor-insurance" class="f-lnk">Motor Insurance</a>
+        <a href="https://services.puicinsurance.com/fire-insurance" class="f-lnk">Fire Insurance</a>
+        <a href="https://services.puicinsurance.com/personal-accident-insurance" class="f-lnk">Personal Accident</a>
+        <a href="https://services.puicinsurance.com/marine-insurance" class="f-lnk">Marine Insurance</a>
+        <a href="https://services.puicinsurance.com/comprehensive-general-liability-insurance" class="f-lnk">Liability</a>
+        <a href="https://services.puicinsurance.com/surety-bond-insurance" class="f-lnk">Surety Bonds</a>
+        <a href="https://services.puicinsurance.com/engineering-insurance" class="f-lnk">Engineering</a>
+      </div>
+      <div>
+        <span class="f-col-h">Company</span>
+        <a href="https://puicinsurance.com/about/" class="f-lnk">About PUIC</a>
+        <a href="https://puicinsurance.com/corporate-governance/" class="f-lnk">Governance</a>
+        <a href="https://puicinsurance.com/our-offices/" class="f-lnk">Our Offices</a>
+        <a href="https://puicinsurance.com/careers/" class="f-lnk">Careers</a>
+        <a href="https://puicinsurance.com/articles/" class="f-lnk">Articles</a>
+        <a href="https://puicinsurance.com/partners/" class="f-lnk">Partners</a>
+      </div>
+      <div>
+        <span class="f-col-h">My Policy</span>
+        <a href="https://services.puicinsurance.com/pay" class="f-lnk">Pay Premium</a>
+        <a href="https://puicinsurance.com/renew-my-policy/" class="f-lnk">Renew Policy</a>
+        <a href="https://puicinsurance.com/claims/file-a-claim/" class="f-lnk">File a Claim</a>
+        <a href="https://puicinsurance.com/claims/claims-checklist/" class="f-lnk">Claims Checklist</a>
+      </div>
+      <div>
+        <span class="f-col-h">Bonds</span>
+        <a href="https://services.puicinsurance.com/form/individual-bond-application" class="f-lnk">Individual Bond</a>
+        <a href="https://services.puicinsurance.com/form/corporation-bond-application" class="f-lnk">Corporate Bond</a>
+        <a href="https://services.puicinsurance.com/form/cosigner-statement" class="f-lnk">Co-Signer Statement</a>
+        <span class="f-col-h" style="margin-top:1.4rem">Follow Us</span>
+        <a href="https://facebook.com/pacificunionph" class="f-lnk">Facebook</a>
+        <a href="https://ph.linkedin.com/company/puicinsurance" class="f-lnk">LinkedIn</a>
+        <a href="https://www.instagram.com/pacificunioninsurance" class="f-lnk">Instagram</a>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <p class="f-copy">© 2013–2026 Pacific Union Insurance Company. All rights reserved.</p>
+      <div class="f-legal">
+        <a href="https://puicinsurance.com/puic_redesign/privacy-policy-puic/">Privacy Policy</a>
+        <a href="https://puicinsurance.com/puic_redesign/terms-conditions-puic/">Terms of Use</a>
+        <a href="https://puicinsurance.com/compliance-and-performance/">Compliance</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ░░░ LIVE CHAT ░░░ -->
+
+<button class="chat-btn" id="chatBtn" aria-label="Open live chat">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+  <span class="chat-pulse"></span>
+</button>
+
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-header">
+    <div class="chat-avatar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <div>
+      <span class="chat-agent-name">PUIC Support</span>
+      <span class="chat-status"><span class="chat-status-dot"></span>Online now</span>
+    </div>
+    <button class="chat-close-btn" id="chatClose">×</button>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div>
+      <div class="chat-bubble">👋 Hello! Welcome to Pacific Union Insurance. How can we help you today?</div>
+      <div class="chat-time">Just now</div>
+    </div>
+  </div>
+  <div class="quick-replies" id="quickReplies">
+    <span class="qr-chip" data-msg="I need a quote">Get a Quote</span>
+    <span class="qr-chip" data-msg="I want to file a claim">File a Claim</span>
+    <span class="qr-chip" data-msg="I need help renewing my policy">Renew Policy</span>
+    <span class="qr-chip" data-msg="I have a question about bonds">About Bonds</span>
+  </div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chatInput" type="text" placeholder="Type a message…">
+    <button class="chat-send" id="chatSend">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ░░░ JS ░░░ -->
+
+<script>
+/* ── Nav scroll + hamburger ── */
+const nav = document.getElementById('nav');
+const hbg = document.getElementById('hamburger');
+const mob = document.getElementById('mobile-nav');
+
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', scrollY > 30);
+}, {passive:true});
+
+hbg.addEventListener('click', () => {
+  hbg.classList.toggle('open');
+  mob.classList.toggle('open');
+  document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
+});
+
+mob.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hbg.classList.remove('open');
+    mob.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+/* ── Scroll reveal ── */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:.1});
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+/* ── Stat counter ── */
+function countTo(el, target, dur=1500) {
+  const s = performance.now();
+  const tick = now => {
+    const p = Math.min((now - s) / dur, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.floor(ease * target);
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+const sObs = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.stat-n[data-val]').forEach(el => countTo(el, +el.dataset.val));
+    sObs.disconnect();
+  }
+}, {threshold:.5});
+const strip = document.querySelector('.stat-strip');
+if (strip) sObs.observe(strip);
+
+/* ── Live Chat ── */
+const chatBtn   = document.getElementById('chatBtn');
+const chatPanel = document.getElementById('chatPanel');
+const chatClose = document.getElementById('chatClose');
+const chatBody  = document.getElementById('chatBody');
+const chatInput = document.getElementById('chatInput');
+const chatSend  = document.getElementById('chatSend');
+const qrWrap    = document.getElementById('quickReplies');
+
+chatBtn.addEventListener('click', () => chatPanel.classList.toggle('open'));
+chatClose.addEventListener('click', () => chatPanel.classList.remove('open'));
+
+const responses = {
+  'i need a quote': "Great! You can get an instant quote for Motor, Fire, Marine, Personal Accident, Liability, or Engineering insurance. Which product interests you? 😊",
+  'i want to file a claim': "I'm sorry to hear that. Let me help you get started. You can file your claim online at our Claims page, or I can guide you through the checklist. Which would you prefer?",
+  'i need help renewing my policy': "Renewing is easy! Head to our Renew My Policy page and follow the steps. Need help finding your policy number? 🔄",
+  'i have a question about bonds': "Of course! We offer Individual, Corporate, and Co-Signer bond applications. What specific information do you need about our Surety Bonds? 📜",
+};
+const defaultReply = "Thank you for reaching out! One of our specialists will follow up with you shortly. In the meantime, is there anything specific I can help you with? 😊";
+
+function addBubble(text, isUser=false) {
+  const wrap = document.createElement('div');
+  wrap.style.cssText = isUser ? 'display:flex;flex-direction:column;align-items:flex-end' : '';
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble';
+  if (isUser) {
+    bubble.style.cssText = 'background:var(--grad);color:white;border-radius:16px 16px 4px 16px;margin-left:auto';
+  }
+  bubble.textContent = text;
+  const time = document.createElement('div');
+  time.className = 'chat-time';
+  time.textContent = 'Just now';
+  wrap.appendChild(bubble);
+  wrap.appendChild(time);
+  chatBody.appendChild(wrap);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function sendMsg(text) {
+  if (!text.trim()) return;
+  addBubble(text, true);
+  chatInput.value = '';
+  qrWrap.style.display = 'none';
+  setTimeout(() => {
+    const key = text.toLowerCase();
+    const reply = responses[key] || defaultReply;
+    addBubble(reply);
+  }, 900);
+}
+
+chatSend.addEventListener('click', () => sendMsg(chatInput.value));
+chatInput.addEventListener('keydown', e => { if (e.key==='Enter') sendMsg(chatInput.value); });
+qrWrap.querySelectorAll('.qr-chip').forEach(chip => {
+  chip.addEventListener('click', () => sendMsg(chip.dataset.msg));
+});
+</script>
+
+</body>
+</html>
